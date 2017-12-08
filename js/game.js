@@ -6,18 +6,6 @@ function searchData(data) {
 
 var cellsdata = [];
 
-var fromStorage = JSON.parse(localStorage.getItem('posData')) || null;
-
-if (fromStorage !== null) {
-	cellsdata = fromStorage;
-}
-
-var colorToUse = "red"
-
-function color(color) {
-	colorToUse = color;
-}
-
 // CREATE CELLS
 
 (() => {
@@ -28,15 +16,6 @@ function color(color) {
 			td.className = 'cell';
 			td.setAttribute('data-x', i);
 			td.setAttribute('data-y', j);
-			if (fromStorage !== null) {
-				var index = fromStorage.findIndex(searchData, {
-					posX: i,
-					posY: j
-				})
-				if (index !== -1) {
-					td.classList.add(fromStorage[index].color);
-				}
-			}
 			tr.append(td);
 		}
 		document.getElementById('root').append(tr);
@@ -58,26 +37,18 @@ function handleData(data) {
 	} else {
 		cellsdata.push(data);
 	}
-	localStorage.setItem('posData', JSON.stringify(cellsdata));
 }
 
 // EVENT LISTENER
 
 for (var i = 0; i < cell.length; i++) {
 	cell[i].addEventListener('click', function(e) {
+		// Log dataX + dataY
+		console.log(`dataX: ${this.getAttribute("data-x")} dataY: ${this.getAttribute("data-y")}`);
 		handleData({
 			posX: parseInt(this.getAttribute('data-x'), 10),
-			posY: parseInt(this.getAttribute('data-y'), 10),
-			color: colorToUse
+			posY: parseInt(this.getAttribute('data-y'), 10)
 		});
 		this.className = "cell";
-		this.classList.add(colorToUse);
 	});
-}
-
-// RESET
-
-function reset() {
-	localStorage.clear();
-	window.location = './';
 }
