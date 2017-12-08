@@ -5,6 +5,8 @@ body, html {
     width: 100%;
     background-color: black;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
@@ -12,4 +14,15 @@ body, html {
     color: white;
     margin: 0;
     padding: 0;
+}
+
+#root {
+    margin: 50px auto;
+    border-collapse: collapse;
+}
+
+td{
+    border: solid 1px white;
+    height: 10px;
+    width: 10px;
 }
