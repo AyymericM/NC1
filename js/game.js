@@ -1,5 +1,8 @@
 // INIT
 
+const sizeY = 23
+const sizeX = 15
+
 function searchData(data) {
 	return data.posX === this.posX && data.posY === this.posY;
 }
@@ -9,9 +12,9 @@ var cellsdata = [];
 // CREATE CELLS
 
 (() => {
-	for (var i = 0; i < 13; i++) {
+	for (var i = 0; i < sizeX; i++) {
 		var tr = document.createElement('tr')
-		for (var j = 0; j < 20; j++) {
+		for (var j = 0; j < sizeY; j++) {
 			var td = document.createElement('td');
 			td.className = 'cell';
 			td.setAttribute('data-x', i);
