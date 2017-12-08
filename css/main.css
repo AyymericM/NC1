@@ -26,3 +26,7 @@ td{
     height: 40px;
     width: 40px;
 }
+
+#tacos{
+  display: none;
+}
