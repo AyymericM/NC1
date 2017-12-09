@@ -41,6 +41,7 @@ body, html {
     left: 0;
 }
 
+
 .title {
     font-family: 'Cancer';
     font-weight: 130;
@@ -50,7 +51,6 @@ body, html {
     padding: 0;
     z-index: 150;
 }
-
 
 /*NE PAS TOUCHER*/
 #root {
