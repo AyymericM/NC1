@@ -22,6 +22,11 @@ function endGame() {
 	clearInterval(spawnCancerIntId)
 	clearInterval(spawnObstacleIntId)
 	clearInterval(playerPosIntId)
+
+	const go = document.createElement('div')
+	go.classList.add('game_over')
+	go.appendChild(document.createTextNode("GAME OVER"))
+	root.appendChild(go)
 }
 
 // DATA FUNCTIONS
