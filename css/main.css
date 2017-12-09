@@ -1,12 +1,55 @@
+@font-face {
+    font-family: 'Cancer';
+    src : url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof2'),
+          url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof'),
+          url('../fonts/DystopianFuture.ttf') format('truetype');
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
     height: 100vh;
     width: 100%;
-    background-color: black;
     text-align: center;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    background-color: #4444;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+:root {
+  font-size: calc(1vw + 1vh + .5vmin);
+}
+
+.background {
+    background-image: url('../img/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 55%;
+    height: 95vh;
+    margin: 0 auto;
+}
+
+.frame {
+    position: absolute;
+    height: 100%;
+    width: 60%;
+    margin-left: 20%;
+    top: 0;
+    left: 0;
+}
+
+
+.title {
+    font-family: 'Cancer';
+    font-weight: 130;
+    font-size: 2rem;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    z-index: 150;
 }
 
 /*NE PAS TOUCHER*/
@@ -38,3 +81,4 @@ body, html {
     height: 40px;
     z-index: 150;
 }
+
