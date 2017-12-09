@@ -138,7 +138,7 @@ var spawnObstacleIntId = setInterval(() => {
 	cells[Y][X].touchable = false;
 
 	spawnCancer(X, Y, false)
-}, 500);
+}, 5000);
 
 // EVENT LISTENER
 
