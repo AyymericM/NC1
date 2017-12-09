@@ -96,7 +96,7 @@ var spawnCancerIntId = setInterval(() => {
 	let countY = 0
 	let randomX = Math.random() * (15 + 1);
 	X = randomX - (randomX % 1);
-	let randomY = Math.random() * (1 + 1);
+	let randomY = Math.random() * (23 + 1);
 	Y = randomY - (randomY % 1);
 
 	cells[Y][X].active = 1;
