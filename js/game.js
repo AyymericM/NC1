@@ -7,6 +7,7 @@ const sizeX = 15
 
 var playerPosIntId = null
 var spawnCancerIntId = null
+var spawnObstacleIntId = null
 
 var gameOver = false
 
@@ -19,6 +20,7 @@ var playerPos = {
 function endGame() {
 	gameOver = true
 	clearInterval(spawnCancerIntId)
+	clearInterval(spawnObstacleIntId)
 	clearInterval(playerPosIntId)
 }
 
@@ -82,9 +84,13 @@ for (var i = 0; i < 24; i++) {
 
 // SPAWN CANCER
 
-function spawnCancer(X, Y) {
+function spawnCancer(X, Y, touchable) {
 	const cancer = document.createElement('div')
-	cancer.classList.add('cancer')
+	if (touchable === true) {
+		cancer.classList.add('cancer')
+	} else {
+		cancer.classList.add('obstacle')
+	}
 	cancer.setAttribute('style', `left: ${Y * 40}px;top: ${X * 40}px;`)
 	cancer.setAttribute('data-x', X)
 	cancer.setAttribute('data-y', Y)
@@ -113,11 +119,25 @@ var spawnCancerIntId = setInterval(() => {
 		}
 	}
 	if (countX === 16 || countY === 25) {
-		spawnCancer(X, Y)
+		spawnCancer(X, Y, true)
 		endGame()
 	} else {
-		spawnCancer(X, Y)
+		spawnCancer(X, Y, true)
 	}
+}, 500);
+
+var spawnObstacleIntId = setInterval(() => {
+	let countX = 0
+	let countY = 0
+	let randomX = Math.random() * (15 + 1);
+	X = randomX - (randomX % 1);
+	let randomY = Math.random() * (23 + 1);
+	Y = randomY - (randomY % 1);
+
+	cells[Y][X].active = 1;
+	cells[Y][X].touchable = false;
+
+	spawnCancer(X, Y, false)
 }, 500);
 
 // EVENT LISTENER
