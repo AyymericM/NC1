@@ -9,13 +9,7 @@ body, html {
     flex-direction: column;
 }
 
-.title {
-    font-size: 32px;
-    color: white;
-    margin: 0;
-    padding: 0;
-}
-
+/*NE PAS TOUCHER*/
 #root {
     position: relative;
     width: 1000px;
@@ -25,6 +19,7 @@ body, html {
     z-index: 100;
 }
 
+/*NE PAS TOUCHER*/
 #johnny {
     position: absolute;
     background-image: url('../img/johnny.gif');
@@ -35,16 +30,11 @@ body, html {
     z-index: 150;
 }
 
+/*NE PAS TOUCHER*/
 .cancer {
     position: absolute;
     background-color: green;
     width: 40px;
     height: 40px;
     z-index: 150;
-}
-
-td{
-    border: solid 1px white;
-    height: 40px;
-    width: 40px;
 }
