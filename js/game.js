@@ -108,13 +108,13 @@ var spawnCancerIntId = setInterval(() => {
 	cells[Y][X].active = 1;
 
 	for (var i = 0; i < cells[Y].length; i++) {
-		if (cells[Y][i].active === 1) {
+		if (cells[Y][i].active === 1 && cells[i][Y].touchable === true) {
 			countX = countX + 1
 		}
 	}
 
 	for (var i = 0; i < cells.length; i++) {
-		if (cells[i][Y].active === 1) {
+		if (cells[i][Y].active === 1 && cells[i][Y].touchable === true) {
 			countY = countY + 1
 		}
 	}
@@ -124,7 +124,7 @@ var spawnCancerIntId = setInterval(() => {
 	} else {
 		spawnCancer(X, Y, true)
 	}
-}, 500);
+}, 1500);
 
 var spawnObstacleIntId = setInterval(() => {
 	let countX = 0
