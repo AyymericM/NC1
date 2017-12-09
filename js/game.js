@@ -1,57 +1,180 @@
 // INIT
 
+const gameRoot = document.getElementById('root')
+const johnny = document.getElementById('johnny')
 const sizeY = 23
 const sizeX = 15
 
-function searchData(data) {
-	return data.posX === this.posX && data.posY === this.posY;
+var playerPosIntId = null
+var spawnCancerIntId = null
+
+var gameOver = false
+
+var playerPos = {
+	X: 280,
+	Y: 480,
+	dir: 'right'
 }
 
-var cellsdata = [];
-
-// CREATE CELLS
-
-(() => {
-	for (var i = 0; i < sizeX; i++) {
-		var tr = document.createElement('tr')
-		for (var j = 0; j < sizeY; j++) {
-			var td = document.createElement('td');
-			td.className = 'cell';
-			td.setAttribute('data-x', i);
-			td.setAttribute('data-y', j);
-			tr.append(td);
-		}
-		document.getElementById('root').append(tr);
-	}
-})()
-
-var cell = document.querySelectorAll('.cell')
+function endGame() {
+	gameOver = true
+	clearInterval(spawnCancerIntId)
+	clearInterval(playerPosIntId)
+}
 
 // DATA FUNCTIONS
 
-function handleData(data) {
-	var index2 = cellsdata.findIndex(searchData, data);
-	if (index2 !== -1) {
-		if (data.color === "white") {
-			cellsdata.splice(index2, 1);
-		} else {
-			cellsdata[index2] = data;
+var cells = []
+
+for (var i = 0; i < 24; i++) {
+	cells[i] = [
+		{
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
+		}, {
+			touchable: true,
+			active: 0
 		}
-	} else {
-		cellsdata.push(data);
-	}
+	]
 }
+
+// SPAWN CANCER
+
+function spawnCancer(X, Y) {
+	const cancer = document.createElement('div')
+	cancer.classList.add('cancer')
+	cancer.setAttribute('style', `left: ${Y * 40}px;top: ${X * 40}px;`)
+	cancer.setAttribute('data-x', X)
+	cancer.setAttribute('data-y', Y)
+	root.appendChild(cancer)
+}
+
+var spawnCancerIntId = setInterval(() => {
+	let countX = 0
+	let countY = 0
+	let randomX = Math.random() * (15 + 1);
+	X = randomX - (randomX % 1);
+	let randomY = Math.random() * (1 + 1);
+	Y = randomY - (randomY % 1);
+
+	cells[Y][X].active = 1;
+
+	for (var i = 0; i < cells[Y].length; i++) {
+		if (cells[Y][i].active === 1) {
+			countX = countX + 1
+		}
+	}
+
+	for (var i = 0; i < cells.length; i++) {
+		if (cells[i][Y].active === 1) {
+			countY = countY + 1
+		}
+	}
+	if (countX === 16 || countY === 25) {
+		spawnCancer(X, Y)
+		endGame()
+	} else {
+		spawnCancer(X, Y)
+	}
+}, 500);
 
 // EVENT LISTENER
 
-for (var i = 0; i < cell.length; i++) {
-	cell[i].addEventListener('click', function(e) {
-		// Log dataX + dataY
-		console.log(`dataX: ${this.getAttribute("data-x")} dataY: ${this.getAttribute("data-y")}`);
-		handleData({
-			posX: parseInt(this.getAttribute('data-x'), 10),
-			posY: parseInt(this.getAttribute('data-y'), 10)
-		});
-		this.className = "cell";
-	});
-}
+document.addEventListener('keydown', (e) => {
+	if (e.keyCode === 39) {
+		playerPos.dir = 'right'
+	} else if (e.keyCode === 37) {
+		playerPos.dir = 'left'
+	} else if (e.keyCode === 38) {
+		playerPos.dir = 'top'
+	} else if (e.keyCode === 40) {
+		playerPos.dir = 'bottom'
+	}
+})
+
+// TIMER
+
+var playerPosInterval = setInterval(() => {
+	if (gameOver === false) {
+		if (playerPos.dir === 'left') {
+			if (playerPos.Y - 40 < 0) {
+				endGame()
+			} else {
+				playerPos.Y = playerPos.Y - 40
+			}
+		} else if (playerPos.dir === 'right') {
+			if (playerPos.Y + 40 >= 1000) {
+				endGame()
+			} else {
+				playerPos.Y = playerPos.Y + 40
+			}
+		} else if (playerPos.dir === 'top') {
+			if (playerPos.X - 40 < 0) {
+				endGame()
+			} else {
+				playerPos.X = playerPos.X - 40
+			}
+		} else if (playerPos.dir === 'bottom') {
+			if (playerPos.X + 40 >= 640) {
+				endGame()
+			} else {
+				playerPos.X = playerPos.X + 40
+			}
+		}
+	}
+
+	if ((cells[playerPos.Y / 40][playerPos.X / 40].active === 1)) {
+		if (cells[playerPos.Y / 40][playerPos.X / 40].touchable === true) {
+			let el = document.querySelector(`[data-x="${playerPos.X / 40}"][data-y="${playerPos.Y / 40}"]`)
+			el.remove()
+			cells[playerPos.Y / 40][playerPos.X / 40].active = 0
+		} else {
+			endGame()
+		}
+	}
+
+	johnny.style.left = (playerPos.Y + 'px');
+	johnny.style.top = (playerPos.X + 'px');
+}, 200)
