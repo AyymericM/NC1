@@ -30,3 +30,20 @@ td{
 #tacos{
   display: none;
 }
+
+.buttons{
+  perspective: 100px;
+  display: inline-block;
+}
+
+.buttonUp{
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  background: #c82122;
+  transform: rotateX(35deg);
+  box-shadow: 0 0 5px darkgrey;
+}
