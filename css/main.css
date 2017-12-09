@@ -1,17 +1,33 @@
+@font-face {
+    font-family: 'Cancer';
+    src : url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof2'),
+          url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof'),
+          url('../fonts/DystopianFuture.ttf') format('truetype');
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
     height: 100vh;
     width: 100%;
-    background-color: black;
     text-align: center;
     display: flex;
     flex-direction: column;
+    background-color: black;
 }
 
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+:root {
+  font-size: calc(1vw + 1vh + .5vmin);
+}
+
+
 .title {
-    font-size: 32px;
-    color: white;
+    font-family: 'Cancer';
+    font-weight: 100;
+    font-size: 2rem;
+    color: #fff;
     margin: 0;
     padding: 0;
 }
