@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Cancer';
-    src : url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof2'),
-          url('../fonts/johnnyfont/dystopian_future-webfont.wof') format('wof'),
-          url('../fonts/DystopianFuture.ttf') format('truetype');
+    src : url('/fonts/johnnyfont/cfpunkisnotdead-regular-webfont.wof') format('wof2'),
+          url('/fonts/johnnyfont/cfpunkisnotdead-regular-webfont.wof') format('wof'),
+          url('/fonts/johnnyfont/cfpunkisnotdead-regular-webfont.ttf') format('truetype');
 }
 
 body, html {
@@ -50,10 +50,20 @@ body, html {
 
 .title {
     font-family: 'Cancer';
-    font-weight: 130;
+    font-weight: 100 !important;
     font-size: 2rem;
     color: white;
-    margin: 50px 0;
+    margin: 50px 0 0 0;
+    padding: 0;
+    z-index: 150;
+}
+
+#score {
+    font-family: 'Arial';
+    font-weight: 100 !important;
+    font-size: 0.75rem;
+    color: white;
+    margin: 0 0 50px 0;
     padding: 0;
     z-index: 150;
 }
@@ -88,6 +98,7 @@ body, html {
 }
 
 .game_over {
+    font-family: 'Comic Sans MS';
     position: absolute;
     top: 40%;
     width: 100%;

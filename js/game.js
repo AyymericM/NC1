@@ -9,6 +9,7 @@ var playerPosIntId = null
 var spawnCancerIntId = null
 var spawnObstacleIntId = null
 
+var score = 0
 var gameOver = false
 
 var playerPos = {
@@ -143,7 +144,7 @@ var spawnObstacleIntId = setInterval(() => {
 	cells[Y][X].touchable = false;
 
 	spawnCancer(X, Y, false)
-}, 5000);
+}, 2500);
 
 // EVENT LISTENER
 
@@ -195,6 +196,8 @@ var playerPosInterval = setInterval(() => {
 			let el = document.querySelector(`[data-x="${playerPos.X / 40}"][data-y="${playerPos.Y / 40}"]`)
 			el.remove()
 			cells[playerPos.Y / 40][playerPos.X / 40].active = 0
+			score = score + 10
+			document.getElementById('score').innerHTML = 'Score: ' + score
 		} else {
 			endGame()
 		}
