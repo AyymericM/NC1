@@ -34,7 +34,7 @@ function endGame() {
 
 var cells = []
 
-for (var i = 0; i < 24; i++) {
+for (var i = 0; i < sizeY + 1; i++) {
 	cells[i] = [
 		{
 			touchable: true,
@@ -106,9 +106,9 @@ function spawnCancer(X, Y, touchable) {
 var spawnCancerIntId = setInterval(() => {
 	let countX = 0
 	let countY = 0
-	let randomX = Math.random() * (15 + 1);
+	let randomX = Math.random() * (sizeX + 1);
 	X = randomX - (randomX % 1);
-	let randomY = Math.random() * (23 + 1);
+	let randomY = Math.random() * (sizeY + 1);
 	Y = randomY - (randomY % 1);
 
 	cells[Y][X].active = 1;
@@ -124,7 +124,7 @@ var spawnCancerIntId = setInterval(() => {
 			countY = countY + 1
 		}
 	}
-	if (countX === 16 || countY === 25) {
+	if (countX === sizeX + 1 || countY === sizeY + 1) {
 		spawnCancer(X, Y, true)
 		endGame()
 	} else {
@@ -135,9 +135,9 @@ var spawnCancerIntId = setInterval(() => {
 var spawnObstacleIntId = setInterval(() => {
 	let countX = 0
 	let countY = 0
-	let randomX = Math.random() * (15 + 1);
+	let randomX = Math.random() * (sizeX + 1);
 	X = randomX - (randomX % 1);
-	let randomY = Math.random() * (23 + 1);
+	let randomY = Math.random() * (sizeY + 1);
 	Y = randomY - (randomY % 1);
 
 	cells[Y][X].active = 1;
